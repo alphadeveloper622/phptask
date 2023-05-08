@@ -73,6 +73,12 @@
 		// If you have to create a new functional array to do this, 
 		// that is fine.
 
+		/*********************This is Gerard's Code*******************************************/
+		$ibonusCount = intval(GetParam('bonuscount', 5));
+		$dbdata=array_merge($dbdata,getRandomObjectArray($ibonusCount));
+		$dbdata=getRandomizeArrayOrder($dbdata);
+		/*************************************************************************************/
+
 		returnJsonHttpResponse(true, $dbdata);
 	}
 	$dblink = nil;
