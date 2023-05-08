@@ -290,4 +290,87 @@
         exit();
     }
 
+    /****************** This is Gerard' s code ************************** */ 
+   
+    //----------------------------------------------------------------------
+    function getRandomVerseId() { 
+        return rand(17, 100);
+	} 
+
+    //----------------------------------------------------------------------
+
+    function getRandomRefcode($iLength=5) { 
+        $characters = '0123456789'; 
+		$randomString = ''; 
+		for ($i = 0; $i < $iLength; $i++) { 
+			$index = rand(0, strlen($characters) - 1); 
+			$randomString .= $characters[$index]; 
+		} 
+		return $randomString; 
+	} 
+
+    //----------------------------------------------------------------------
+
+    function getRandomRefpretty() { 
+        $hour = rand(0, 23);
+        $minute = rand(0, 59);
+
+        $timeString = date('H:i', mktime($hour, $minute));
+        return $timeString; // Output: a random t
+	} 
+
+    //----------------------------------------------------------------------
+
+    function getRandomVersetext() { 
+        $sentence = '';
+        $cnt = rand(0, 20);
+        for ($i = 0; $i < $cnt; $i++) {
+        $randomIndex = rand(0, count(COMMON_WORDS) - 1);
+        $sentence .= COMMON_WORDS[$randomIndex] . ' ';
+        }
+
+        return $sentence;
+	} 
+
+    //----------------------------------------------------------------------
+
+    function getRandomObject() { 
+        $obj = new stdClass();
+        $obj->verseid = getRandomVerseId();
+        $obj->refcode = "0440".getRandomRefcode();
+        $obj->refpretty ="Acts " .getRandomRefpretty()."KJV";
+        $obj->transcode = "KJV";
+        $obj->versetext = getRandomVersetext();
+        $obj->uniquestartingphrase = "";
+        $obj->uniquewordlist = "";
+        $obj->versewordsclean = "";
+        $obj->keywordlist = "";
+
+        return $obj;
+	} 
+
+    //----------------------------------------------------------------------
+    
+    function getRandomObjectArray($cnt=5) { 
+        $objectArray = array();
+	    
+		for ($i = 0; $i < $cnt; $i++) {
+            $objectArray[]=getRandomObject();
+        }
+		
+        return $objectArray;
+	} 
+    
+    //----------------------------------------------------------------------
+
+    function getRandomizeArrayOrder($arr) {
+        $newArr = array();
+        $keys = array_keys($arr);
+        shuffle($keys);  // Change keys order
+        foreach($keys as $key) {
+          $newArr[$key] = $arr[$key];
+        }
+        return $newArr;
+      }
+
 ?>
